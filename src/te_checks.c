@@ -894,17 +894,16 @@ struct check_result *check_ifelse_never_match(__attribute__((unused)) const stru
 			.str = empty_str,
 			.quoted = QUOTE_QUOTED
 		};
-		if (left_cond->first_child->next) {
-			left_data = left_cond->first_child->next->data.mas_data;
-		} else {
-			left_data = &empty_str_data;
+		const struct policy_node *left_value = left_cond->first_child->next;
+		const struct policy_node *right_value = right_cond->first_child->next;
+		if ((left_value && (left_value->flavor != NODE_M4_SIMPLE_MACRO || left_value->next))
+		    || (right_value && (right_value->flavor != NODE_M4_SIMPLE_MACRO || right_value->next))) {
+			triple_start = triple_start->next->next->next;
+			continue;
 		}
 
-		if (right_cond->first_child->next) {
-			right_data = right_cond->first_child->next->data.mas_data;
-		} else {
-			right_data = &empty_str_data;
-		}
+		left_data = left_value ? left_value->data.mas_data : &empty_str_data;
+		right_data = right_value ? right_value->data.mas_data : &empty_str_data;
 
 		if (left_data->quoted == QUOTE_UNKNOWN
 		   || right_data->quoted == QUOTE_UNKNOWN) {
