@@ -209,3 +209,6 @@ E-009:
 E-010:
 
 	bare_m4_macro
+
+E-011:
+	ifelse(one, `two')

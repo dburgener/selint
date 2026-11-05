@@ -206,6 +206,7 @@ Warning Checks:
 * W-011: Declaration in require block not defined in own module
 * W-012: Conditional expression contains unknown identifier
 * W-013: Incorrect usage of audit_access permission
+& W-014: Ifelse condition can never match
 
 Error Checks:
 
@@ -218,6 +219,7 @@ Error Checks:
 * E-008: Usage of unknown class
 * E-009: Empty optional or require macro block
 * E-010: Usage of unknown simple m4 macro or stray word
+* E-011: Ifelse has wrong argument count
 
 Fatal Error Checks:
 
